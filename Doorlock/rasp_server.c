@@ -5,6 +5,7 @@
 #include <arpa/inet.h>
 #include <sys/socket.h>
 
+
 #include "doorlock.h"
 #include "keypad.h"
 #include "motor.h"
@@ -80,8 +81,14 @@ int main(int argc, char *argv[])
 	initMotor();
 	initKeypad();
 	initBuzzer();
+
+	
+
+	
 	printf("ENTER PASSWD:");
 	fflush(stdout);
+	
+	char *b;
 
 	while(1)
 	{
@@ -106,7 +113,12 @@ int main(int argc, char *argv[])
 					}
 				}
 			}
+	//		else{
+	//			b = rcv_buf;
+	//			printf("%s", b);
+	//		}
 		}
+		
 		else {
 			write(clnt_sock, snd_buf, BUF_SIZE);
 			break;

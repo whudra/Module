@@ -1,4 +1,4 @@
-﻿
+﻿#include "pi.h"
 #include "doorlock.h"
 #include "keypad.h"
 #include "motor.h"
@@ -80,6 +80,8 @@ void PasswardVerifySuccess(void)
 
 int openDoor(void)
 {
+    //
+    initCamera();
 	g_nDoorState = 1;
 	
 	printf("\nOPEN DOOR\n");
