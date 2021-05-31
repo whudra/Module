@@ -3,6 +3,8 @@
 #include "keypad.h"
 #include "motor.h"
 #include "buzzer.h"
+#include "dbconnect.h"
+
 
 #define PASSWARD_NUM    4
 
@@ -15,6 +17,7 @@ int g_nPreDoorState;
 
 const int OpenDoorBeepTable[4]	={ MI, DO_L, SOL, DO_H };
 const int ErrorBeepTable[2]		={ MI, MI };
+char* fsn;
 
 
 
@@ -82,6 +85,10 @@ int openDoor(void)
 {
     //
     initCamera();
+    
+    dbconnect(fsn);
+    
+    
 	g_nDoorState = 1;
 	
 	printf("\nOPEN DOOR\n");
@@ -227,8 +234,9 @@ int controlDoorlock(int doorStatus)
 	return 0;
 }
 
-int getSensorData(void)
+int getSensorData(char* sn)
 {
+	fsn = sn;
 	return g_nDoorState;
 }
 	

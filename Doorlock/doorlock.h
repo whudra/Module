@@ -17,7 +17,7 @@ int closeDoor(void);
 
 int controlDoorlock(int doorStatus);
 
-int getSensorData(void);
+int getSensorData(char* sn);
 int setupWiringPiGpio(void);
 
 #endif  /* __DOORLOCK_H__ */

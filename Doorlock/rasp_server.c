@@ -11,14 +11,14 @@
 #include "motor.h"
 #include "buzzer.h"
 
-#define BUF_SIZE 		5
+#define BUF_SIZE 		128
 #define INIT_VAL_OF_MEM	0
 #define NUM_OF_ARGC		2
 #define PROTOCOL_TYPE	0
 #define NUM_OF_QUEUE	5
 #define DATA_SIZE		1
 
-#define PKT_STX	0x01
+#define PKT_STX	0x01	
 #define PKT_ETX	0x05
 
 #define CMD_SENSOR_REQ	0x10
@@ -26,6 +26,7 @@
 
 int getData(void);
 void error_handling(char *message);
+char* trim(char *s);
 
 int main(int argc, char *argv[])
 {
@@ -54,7 +55,13 @@ int main(int argc, char *argv[])
 		exit(1);
 	}
 	
-	serv_sock =  socket(PF_INET, SOCK_STREAM, PROTOCOL_TYPE);   
+	serv_sock =  socket(PF_INET, SOCK_STREAM, PROTOCOL_TYPE); 
+	
+	
+	int option;
+	option = 1;	
+	setsockopt( serv_sock, SOL_SOCKET, SO_REUSEADDR, &option, sizeof(option)); 
+	  
 	if (serv_sock == -1)
 	        error_handling("socket() error");
 
@@ -87,18 +94,31 @@ int main(int argc, char *argv[])
 	
 	printf("ENTER PASSWD:");
 	fflush(stdout);
-	
-	char *b;
 
+	char* sn = "no";
+	
 	while(1)
 	{
+		while(sn == "no"){
+			if(readBufSize = read(clnt_sock, rcv_buf, BUF_SIZE) != -1){
+				printf("rcv_buf : %s || %d\n", rcv_buf, sizeof(trim(rcv_buf)));
+				if(rcv_buf != NULL){
+					printf("sn : %s || rcv_bf : %s", sn, rcv_buf); 
+					sn = rcv_buf;
+					printf("sn : %s || rcv_bf : %s", sn, rcv_buf);
+					write(clnt_sock, rcv_buf, BUF_SIZE);
+				}
+			}
+		}
+
+		
 		if(readBufSize = read(clnt_sock, rcv_buf, BUF_SIZE) != -1) {
 			if(rcv_buf[0] == PKT_STX) {
 				if(rcv_buf[1] == CMD_SENSOR_REQ) {
 					if(rcv_buf[4] == PKT_ETX) {
-						
+				        printf("%s", sn);						
 						controlDoorlock(rcv_buf[2]);
-						getData = getSensorData();
+						getData = getSensorData(sn);
 
 						getData_lsb = (getData & 0xff);
 						getData_msb = ((getData>>8) & 0xff);
@@ -113,10 +133,6 @@ int main(int argc, char *argv[])
 					}
 				}
 			}
-	//		else{
-	//			b = rcv_buf;
-	//			printf("%s", b);
-	//		}
 		}
 		
 		else {
