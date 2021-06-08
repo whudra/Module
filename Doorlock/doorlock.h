@@ -12,12 +12,13 @@ void PasswardVerifySuccess(void);
 void OpenDoorBeep(void);
 void ErrorBeep(void);
 
-int openDoor(void);
-int closeDoor(void);
+int openDoor(char*);
+int closeDoor(char*);
 
-int controlDoorlock(int doorStatus);
+int controlDoorlock(int doorStatus, char *sn);
 
-int getSensorData(char* sn);
+
+int getSensorData();
 int setupWiringPiGpio(void);
 
 #endif  /* __DOORLOCK_H__ */

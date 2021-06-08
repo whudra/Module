@@ -17,9 +17,6 @@ int g_nPreDoorState;
 
 const int OpenDoorBeepTable[4]	={ MI, DO_L, SOL, DO_H };
 const int ErrorBeepTable[2]		={ MI, MI };
-char* fsn;
-
-
 
 int setupWiringPiGpio(void)
 {
@@ -80,13 +77,13 @@ void PasswardVerifySuccess(void)
     MotorStop();
 #endif
 }
-
-int openDoor(void)
+int openDoor(char* fsn)
 {
     //
     initCamera();
+    char* state = "opened";
     
-    dbconnect(fsn);
+    dbconnect(fsn, state);
     
     
 	g_nDoorState = 1;
@@ -101,8 +98,12 @@ int openDoor(void)
 	return g_nDoorState;
 }	
 
-int closeDoor(void)
+int closeDoor(char *fsn)
 {
+        char* state = "closed";
+    
+        dbconnect(fsn, state);
+	
 	g_nDoorState = 0;
 	
 	printf("\nCLOSE DOOR\n");
@@ -214,15 +215,15 @@ void ButtonDetect(void)
             break;
     }
 }
-
-int controlDoorlock(int doorStatus)
+int controlDoorlock(int doorStatus, char *sn)
 {
+	printf("[check doorlock state]sn : %s\n", sn);		
 	if(doorStatus && (!g_nPreDoorState)) {
-		openDoor();
+		openDoor(sn);
 		g_nPreDoorState = doorStatus;
 	}
 	else if(!doorStatus && (g_nPreDoorState && !doorStatus)) {
-		closeDoor();
+		closeDoor(sn);
 		g_nPreDoorState = doorStatus;
 	}
 	else {
@@ -234,9 +235,8 @@ int controlDoorlock(int doorStatus)
 	return 0;
 }
 
-int getSensorData(char* sn)
+int getSensorData()
 {
-	fsn = sn;
 	return g_nDoorState;
 }
 	

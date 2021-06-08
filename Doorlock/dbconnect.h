@@ -11,7 +11,7 @@
 #define DB_PASS "1234"
 #define DB_NAME "mydb"
 
-int dbconnect(char* Serial_Number) {
+int dbconnect(char* Serial_Number, char* state) {
 	MYSQL* connection, conn;
     
     //time
@@ -28,7 +28,7 @@ int dbconnect(char* Serial_Number) {
     
     //time
     
-    const char* state = "open";
+ //   const char* state = "open";
     
 
 	FILE* fp;
