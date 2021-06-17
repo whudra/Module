@@ -152,9 +152,12 @@ void ButtonDetect(void)
     switch(nkeyValue)
     {
         case 1:
-			printf("1");
+//			printf("1");
+//			fflush(stdout);
+//            g_cInputPasswardbuf[nCounter] = '1';
+			printf("3");
 			fflush(stdout);
-            g_cInputPasswardbuf[nCounter] = '1';
+            g_cInputPasswardbuf[nCounter] = '3';
             nCounter++;
             break;
         case 2:
@@ -164,15 +167,21 @@ void ButtonDetect(void)
             nCounter++;
             break;
         case 3:
-			printf("3");
+//			printf("3");
+//			fflush(stdout);
+//            g_cInputPasswardbuf[nCounter] = '3';
+			printf("1");
 			fflush(stdout);
-            g_cInputPasswardbuf[nCounter] = '3';
+            g_cInputPasswardbuf[nCounter] = '1';
             nCounter++;
             break;
         case 4:
-			printf("4");
+//			printf("4");
+//			fflush(stdout);
+//            g_cInputPasswardbuf[nCounter] = '4';
+			printf("6");
 			fflush(stdout);
-            g_cInputPasswardbuf[nCounter] = '4';
+            g_cInputPasswardbuf[nCounter] = '6';
             nCounter++;
             break;
         case 5:
@@ -182,15 +191,21 @@ void ButtonDetect(void)
             nCounter++;
             break;
         case 6:
-			printf("6");
+//			printf("6");
+//			fflush(stdout);
+//            g_cInputPasswardbuf[nCounter] = '6';
+			printf("4");
 			fflush(stdout);
-            g_cInputPasswardbuf[nCounter] = '6';
+            g_cInputPasswardbuf[nCounter] = '4';
             nCounter++;
             break;
         case 7:
-			printf("7");
+//			printf("7");
+//			fflush(stdout);
+//            g_cInputPasswardbuf[nCounter] = '7';
+			printf("9");
 			fflush(stdout);
-            g_cInputPasswardbuf[nCounter] = '7';
+            g_cInputPasswardbuf[nCounter] = '9';
             nCounter++;
             break;
         case 8:
@@ -200,9 +215,12 @@ void ButtonDetect(void)
             nCounter++;
             break;
         case 9:
-			printf("9");
+//			printf("9");
+//			fflush(stdout);
+//            g_cInputPasswardbuf[nCounter] = '9';
+			printf("7");
 			fflush(stdout);
-            g_cInputPasswardbuf[nCounter] = '9';
+            g_cInputPasswardbuf[nCounter] = '7';
             nCounter++;
             break;
         case 10:
@@ -217,7 +235,7 @@ void ButtonDetect(void)
 }
 int controlDoorlock(int doorStatus, char *sn)
 {
-	printf("[check doorlock state]sn : %s\n", sn);		
+	//printf("[check doorlock state]sn : %s\n", sn);		
 	if(doorStatus && (!g_nPreDoorState)) {
 		openDoor(sn);
 		g_nPreDoorState = doorStatus;

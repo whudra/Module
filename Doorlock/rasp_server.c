@@ -97,7 +97,7 @@ int main(int argc, char *argv[])
 	
 	while(1)
 	{
-		printf("[check1]sn : %s\n", str2);
+		//printf("[check1]sn : %s\n", str2);
 		if(readBufSize = read(clnt_sock, rcv_buf, BUF_SIZE) != -1) {
 //			printf("[check2]sn : %s\n", str2);
 			if(rcv_buf[0] == PKT_STX) {

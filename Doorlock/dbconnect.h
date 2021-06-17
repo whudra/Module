@@ -23,21 +23,17 @@ int dbconnect(char* Serial_Number, char* state) {
     timer = time(NULL);
     t = localtime(&timer);
     
-    sprintf(date, "%02d-%02d-%02d-%02d-%02d-%02d", t->tm_year%100, t->tm_mon+1, t->tm_mday,
+    sprintf(date, "%02d-%02d-%02d %02d:%02d:%02d", t->tm_year%100, t->tm_mon+1, t->tm_mday,
     t->tm_hour, t->tm_min, t->tm_sec);
     
     //time
-    
- //   const char* state = "open";
-    
+
 
 	FILE* fp;
 	unsigned long len, file_size;
 	int query_stat;
 	char* buf, * buf_to, * query;
 	const char* stat = "INSERT INTO log(imagelog, Serial_Number, date, state) VALUES ""('%s', '%s', '%s', '%s')";
-
-//	sprintf(query, "insert into address values ""('%s', '%s')", name, tel);
 
 	//DB 초기화 및 접속
 	mysql_init(&conn);
